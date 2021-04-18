@@ -32,6 +32,10 @@ module.exports = app => {
       type: Number,
       default: 0,
     },
+    top: {
+      type: Boolean,
+      default: false,
+    },
   });
   return mongoose.model('Article', OrderSchema, 'article'); // 返回model，其中projects为数据库中表的名称
 };

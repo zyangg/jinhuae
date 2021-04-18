@@ -28,6 +28,14 @@ class PostController extends Controller {
       res,
     };
   }
+  async delPost() {
+    const { ctx } = this;
+    const id = ctx.request.body.data;
+    const res = await ctx.service.post.delPost(id);
+    ctx.body = {
+      res,
+    };
+  }
   async reply() {
     const {
       ctx,

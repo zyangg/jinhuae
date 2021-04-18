@@ -28,6 +28,10 @@ class PostService extends Service {
     const { ctx } = this;
     return ctx.model.Reply1.find({ name1Id: data });
   }
+  async delPost(id) {
+    const { ctx } = this;
+    return ctx.model.Reply1.remove({ _id: id });
+  }
 }
 
 module.exports = PostService;

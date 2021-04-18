@@ -10,6 +10,7 @@ module.exports = app => {
   router.get('/getNews', controller.news.index);
   router.post('/searchFindNew', controller.news.searchFindNew);
   router.get('/getPosts', controller.post.getPost);
+  router.post('/getPosts', controller.post.delPost);
   // 用户注册
   router.post('/register', controller.register.index);
   // 用户登录
@@ -36,4 +37,8 @@ module.exports = app => {
   router.post('/ModifyArticle', controller.news.ModifyArticle);
   // 编辑用户
   router.post('/DeleteArticle', controller.news.DeleteArticle);
+  // 置顶新闻或者取消置顶
+  router.post('/topArticle', controller.news.topArticle);
+  router.post('/notopArticle', controller.news.notopArticle);
+  router.get('/getTopArticle', controller.news.getTopArticle);
 };

@@ -62,7 +62,7 @@ class NewsController extends Controller {
   async ModifyArticle() {
     const { ctx } = this;
     const data = ctx.request.body.data;
-    const res = await ctx.service.article.ModifyArticle(data.id, data.title, data.author, data.date, data.time);
+    const res = await ctx.service.article.ModifyArticle(data.id, data.title, data.author, data.date, data.time, data.count);
     ctx.body = {
       res,
     };
@@ -71,6 +71,29 @@ class NewsController extends Controller {
     const { ctx } = this;
     const data = ctx.request.body.data;
     const res = await ctx.service.article.DeleteArticle(data);
+    ctx.body = {
+      res,
+    };
+  }
+  async topArticle() {
+    const { ctx } = this;
+    const id = ctx.request.body.data;
+    const res = await ctx.service.article.topArticle(id);
+    ctx.body = {
+      res,
+    };
+  }
+  async notopArticle() {
+    const { ctx } = this;
+    const id = ctx.request.body.data;
+    const res = await ctx.service.article.notopArticle(id);
+    ctx.body = {
+      res,
+    };
+  }
+  async getTopArticle() {
+    const { ctx } = this;
+    const res = await ctx.service.article.getTopArticle();
     ctx.body = {
       res,
     };

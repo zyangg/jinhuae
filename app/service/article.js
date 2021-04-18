@@ -50,15 +50,26 @@ class ArticleService extends Service {
     const res = await ctx.model.NewReply.find({ newId: id });
     return res;
   }
-  async ModifyArticle(id, title, author, date, time) {
+  async ModifyArticle(id, title, author, date, time, count) {
     const { ctx } = this;
-    console.log('aaa', id, title, author, date, time);
-
-    await ctx.model.Article.updateOne({ _id: id }, { $set: { title, author, date, time } });
+    await ctx.model.Article.updateOne({ _id: id }, { $set: { title, author, date, time, count } });
   }
   async DeleteArticle(id) {
     const { ctx } = this;
     await ctx.model.Article.remove({ _id: id });
+  }
+  async topArticle(id) {
+    const { ctx } = this;
+    await ctx.model.Article.updateOne({ _id: id }, { $set: { top: true } });
+  }
+  async notopArticle(id) {
+    const { ctx } = this;
+    await ctx.model.Article.updateOne({ _id: id }, { $set: { top: false } });
+  }
+  async getTopArticle() {
+    const { ctx } = this;
+    const res = await ctx.model.Article.find({ top: true });
+    return res;
   }
 }
 
