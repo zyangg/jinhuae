@@ -7,15 +7,15 @@ class UserService extends Service {
     const { ctx } = this;
     ctx.model.Users.create({ name, password, manager });
   }
-  async getAllUser() {
-    const { ctx } = this;
-    const res = ctx.model.Users.find();
-    return res;
-  }
   async check(name) {
     const { ctx } = this;
     const length = await ctx.model.Users.find({ name }).count();
     return length;
+  }
+  async getAllUser() {
+    const { ctx } = this;
+    const res = ctx.model.Users.find();
+    return res;
   }
   async login(name, password) {
     const { ctx } = this;
@@ -70,6 +70,47 @@ class UserService extends Service {
       });
     }
     return res;
+  }
+  async getOneUser(name) {
+    const { ctx } = this;
+    return await ctx.model.Users.findOne({ name });
+  }
+  async findUser(size, currentPage) {
+    const { ctx } = this;
+    const res1 = await ctx.model.Users.find().count();
+    const res2 = await ctx.model.Users.find().limit(size).skip(size * (currentPage - 1));
+    return {
+      total: res1,
+      res: res2,
+    };
+  }
+  async findUserByValue(size, currentPage, value) {
+    const { ctx } = this;
+    let managers = null;
+    if (value === '管理员') {
+      managers = true;
+    }
+    if (value === '用户') {
+      managers = false;
+    }
+    const res1 = await ctx.model.Users.find(
+      {
+        $or: [
+          { name: { $regex: value } },
+          { password: { $regex: value } }, { manager: managers },
+        ] }
+    ).count();
+    const res2 = await ctx.model.Users.find(
+      {
+        $or: [
+          { name: { $regex: value } },
+          { password: { $regex: value } }, { manager: managers },
+        ] }
+    ).limit(size).skip(size * (currentPage - 1));
+    return {
+      total: res1,
+      res: res2,
+    };
   }
 }
 

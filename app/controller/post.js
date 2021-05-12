@@ -23,7 +23,17 @@ class PostController extends Controller {
   }
   async getPost() {
     const { ctx } = this;
-    const res = await ctx.service.post.getPost();
+    const size = ctx.request.body.data.size;
+    const currentPage = ctx.request.body.data.currentpage;
+    const res = await ctx.service.post.getPost(size, currentPage);
+    ctx.body = {
+      res,
+    };
+  }
+  async getPostOne() {
+    const { ctx } = this;
+    const id = ctx.request.body.data;
+    const res = await ctx.service.post.getPostOne(id);
     ctx.body = {
       res,
     };
@@ -44,7 +54,8 @@ class PostController extends Controller {
     const name = form.data.name;
     const desc = form.data.desc;
     const postId = form.data.postId;
-    const res = await ctx.service.post.reply(name, desc, postId);
+    const reply = form.data.reply;
+    const res = await ctx.service.post.reply(name, desc, postId, reply);
     ctx.body = {
       res,
     };
@@ -80,6 +91,43 @@ class PostController extends Controller {
     } = this;
     const data = ctx.request.body;
     const res = await ctx.service.post.getReply1(data.data);
+    ctx.body = {
+      res,
+    };
+  }
+  async delPostReply() {
+    const { ctx } = this;
+    const id = ctx.request.body.data;
+    const res = await ctx.service.post.delPostReply(id);
+    ctx.body = {
+      res,
+    };
+  }
+  async delPostComment() {
+    const { ctx } = this;
+    const id = ctx.request.body.data.id;
+    const postId = ctx.request.body.data.postId;
+    const reply = ctx.request.body.data.reply;
+    const res = await ctx.service.post.delPostComment(id, postId, reply);
+    ctx.body = {
+      res,
+    };
+  }
+  async likePost() {
+    const { ctx } = this;
+    const postId = ctx.request.body.data.postId;
+    const like = ctx.request.body.data.like;
+    const res = await ctx.service.post.likePost(postId, like);
+    ctx.body = {
+      res,
+    };
+  }
+  async findPost() {
+    const { ctx } = this;
+    const size = ctx.request.body.data.size;
+    const currentPage = ctx.request.body.data.currentPage;
+    const value = ctx.request.body.data.value;
+    const res = await ctx.service.post.findPost(size, currentPage, value);
     ctx.body = {
       res,
     };

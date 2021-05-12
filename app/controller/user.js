@@ -30,6 +30,33 @@ class UserController extends Controller {
       res,
     };
   }
+  async getOneUser() {
+    const { ctx } = this;
+    const data = ctx.request.body.data;
+    const res = await ctx.service.user.getOneUser(data);
+    ctx.body = {
+      res,
+    };
+  }
+  async findUser() {
+    const { ctx } = this;
+    const size = ctx.request.body.data.size;
+    const currentPage = ctx.request.body.data.currentPage;
+    const res = await ctx.service.user.findUser(size, currentPage);
+    ctx.body = {
+      res,
+    };
+  }
+  async findUserByValue() {
+    const { ctx } = this;
+    const size = ctx.request.body.data.size;
+    const currentPage = ctx.request.body.data.currentPage;
+    const value = ctx.request.body.data.value;
+    const res = await ctx.service.user.findUserByValue(size, currentPage, value);
+    ctx.body = {
+      res,
+    };
+  }
 }
 
 module.exports = UserController;

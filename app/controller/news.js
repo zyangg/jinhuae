@@ -9,13 +9,16 @@ class NewsController extends Controller {
     ctx.body = {
       res,
     };
+    return res;
   }
   async searchFindNew() {
     const { ctx } = this;
     const data = ctx.request.body;
     const datePick = data.data.datePick;
     const checkedType = data.data.checkedType;
-    const res = await ctx.service.article.findBySearch(datePick, checkedType);
+    const size = data.data.size;
+    const currentPage = data.data.currentPage;
+    const res = await ctx.service.article.findBySearch(datePick, checkedType, size, currentPage);
     ctx.body = {
       res,
     };
@@ -94,6 +97,65 @@ class NewsController extends Controller {
   async getTopArticle() {
     const { ctx } = this;
     const res = await ctx.service.article.getTopArticle();
+    ctx.body = {
+      res,
+    };
+  }
+  async delNewReply() {
+    const { ctx } = this;
+    const id = ctx.request.body.data;
+    const res = await ctx.service.article.delNewReply(id);
+    ctx.body = {
+      res,
+    };
+  }
+  async findNew() {
+    const { ctx } = this;
+    const value = ctx.request.body.data.value;
+    const size = ctx.request.body.data.size;
+    const currentPage = ctx.request.body.data.currentPage;
+    const res = await ctx.service.article.findNew(value, size, currentPage);
+    ctx.body = {
+      res,
+    };
+  }
+  async findNewById() {
+    const { ctx } = this;
+    const id = ctx.request.body.data.id;
+    const res = await ctx.service.article.findNewById(id);
+    ctx.body = {
+      res,
+    };
+  }
+  async findAllNewPage() {
+    const { ctx } = this;
+    const size = ctx.request.body.data.size;
+    const currentPage = ctx.request.body.data.currentPage;
+    const res = await ctx.service.article.findAllNewPage(size, currentPage);
+    ctx.body = {
+      res,
+    };
+  }
+  async findTypeNewPage() {
+    const { ctx } = this;
+    const size = ctx.request.body.data.size;
+    const currentPage = ctx.request.body.data.currentPage;
+    const type = ctx.request.body.data.type;
+    const res = await ctx.service.article.findTypeNewPage(size, currentPage, type);
+    ctx.body = {
+      res,
+    };
+  }
+  async getCarouselNewData() {
+    const { ctx } = this;
+    const res = await ctx.service.article.getCarouselNewData();
+    ctx.body = {
+      res,
+    };
+  }
+  async getTypeNewNum() {
+    const { ctx } = this;
+    const res = await ctx.service.article.getTypeNewNum();
     ctx.body = {
       res,
     };
