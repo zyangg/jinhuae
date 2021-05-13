@@ -14,7 +14,7 @@ module.exports = app => {
       type: String,
     },
     img: {
-      type: String,
+      type: Array,
     },
     date: {
       type: String,

@@ -51,16 +51,16 @@ class PostService extends Service {
       $set: { reply: reply - 1 },
     });
   }
-  async delPostReply(id) {
-    const { ctx } = this;
-    const res = await ctx.model.Reply1.remove({ _id: id });
-    return res;
-  }
   async likePost(postId, likes) {
     const { ctx } = this;
     return await ctx.model.Post.update({ _id: postId }, {
       $set: { like: likes + 1 },
     });
+  }
+  async delPostReply(id) {
+    const { ctx } = this;
+    const res = await ctx.model.Reply1.remove({ _id: id });
+    return res;
   }
   async findPost(size, currentPage, value) {
     const { ctx } = this;

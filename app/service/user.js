@@ -82,6 +82,7 @@ class UserService extends Service {
     return {
       total: res1,
       res: res2,
+      type: 1,
     };
   }
   async findUserByValue(size, currentPage, value) {
@@ -110,6 +111,7 @@ class UserService extends Service {
     return {
       total: res1,
       res: res2,
+      type: 2,
     };
   }
 }
