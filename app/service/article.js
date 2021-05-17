@@ -3,9 +3,9 @@
 const Service = require('egg').Service;
 
 class ArticleService extends Service {
-  async index(title, describe, content, img, date, time, author, type) {
+  async index(title, describe, content, img, date, time, author, type, classs, videoAudio, cartoonType) {
     const { ctx } = this;
-    ctx.model.Article.create({ title, describe, content, img, date, time, author, type });
+    ctx.model.Article.create({ title, describe, content, img, date, time, author, type, class: classs, videoAudio, cartoonType });
   }
   async find() {
     const { ctx } = this;
@@ -154,6 +154,25 @@ class ArticleService extends Service {
       caijing,
       shizheng,
       shehui,
+    };
+  }
+  async getNewByClass(size, currentPage, classs) {
+    const { ctx } = this;
+    const res1 = await ctx.model.Article.find({ class: classs }).count();
+    const res2 = await ctx.model.Article.find({ class: classs }).limit(size).skip(size * (currentPage - 1));
+    return {
+      total: res1,
+      res: res2,
+    };
+  }
+  async getNewByCartoonType(size, currentPage, classs, chType) {
+    const { ctx } = this;
+    console.log('aaaaaaa', classs, chType);
+    const res1 = await ctx.model.Article.find({ class: classs, cartoonType: chType }).count();
+    const res2 = await ctx.model.Article.find({ class: classs, cartoonType: chType }).limit(size).skip(size * (currentPage - 1));
+    return {
+      total: res1,
+      res: res2,
     };
   }
 }

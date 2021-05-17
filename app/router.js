@@ -70,4 +70,16 @@ module.exports = app => {
   router.get('/getCarouselNewData', controller.news.getCarouselNewData);
   // 获取各个新闻数量
   router.get('/getTypeNewNum', controller.news.getTypeNewNum);
+  // 视频上传
+  router.get('/getOssPermission', controller.news.getOssPermission);
+  // 发布视频新闻
+  router.post('/publishVideoNew', controller.video.publishVideoNew);
+  // 根据url下载链接
+  router.post('/downLoadUrl', controller.video.downLoadUrl);
+  // 获取音频文本
+  router.get('/getVideoText', controller.video.getVideoText);
+  // 根据新闻种类获取新闻
+  router.post('/getNewByClass', controller.news.getNewByClass);
+  // 根据新闻种类子类型获取新闻
+  router.post('/getNewByCartoonType', controller.news.getNewByCartoonType);
 };

@@ -7,10 +7,16 @@
     "declarations": true
   },
   "dependencies": {
+    "ali-oss": "^6.15.2",
+    "crypto-js": "^4.0.0",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
     "egg-mongoose": "^3.3.1",
-    "egg-scripts": "^2.11.0"
+    "egg-scripts": "^2.11.0",
+    "log4node": "^0.1.6",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "ws": "^7.4.5"
   },
   "devDependencies": {
     "autod": "^3.0.1",

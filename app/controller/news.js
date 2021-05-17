@@ -1,8 +1,28 @@
 'use strict';
 
+const {
+  STS,
+} = require('ali-oss');
 const Controller = require('egg').Controller;
 
 class NewsController extends Controller {
+  async getOssPermission() {
+    const { ctx } = this;
+    const sts = new STS({
+      accessKeyId: 'LTAI5tLzsc2pTyg8BCPjwyjV',
+      accessKeySecret: 'g73g7XZnAEA7aIbJhZQWpMraaWCgr2',
+      bucket: 'vehicle-rent',
+      region: 'oss-cn-hangzhou',
+    });
+    const res = await sts.assumeRole('acs:ram::1128699048525009:role/rent-amanager', null, '3600').then(result => {
+      console.log('aaaa', result);
+      console.log('aaaaaaaaa', result.credentials.SecurityToken);
+      return result;
+    });
+    ctx.body = {
+      res,
+    };
+  }
   async index() {
     const { ctx } = this;
     const res = await ctx.service.article.find();
@@ -155,7 +175,29 @@ class NewsController extends Controller {
   }
   async getTypeNewNum() {
     const { ctx } = this;
-    const res = await ctx.service.article.getTypeNewNum();
+    const classs = ctx.request.body.data;
+    const res = await ctx.service.article.getTypeNewNum(classs);
+    ctx.body = {
+      res,
+    };
+  }
+  async getNewByClass() {
+    const { ctx } = this;
+    const size = ctx.request.body.data.size;
+    const currentPage = ctx.request.body.data.currentPage;
+    const classs = ctx.request.body.data.classs;
+    const res = await ctx.service.article.getNewByClass(size, currentPage, classs);
+    ctx.body = {
+      res,
+    };
+  }
+  async getNewByCartoonType() {
+    const { ctx } = this;
+    const size = ctx.request.body.data.size;
+    const currentPage = ctx.request.body.data.currentPage;
+    const classs = ctx.request.body.data.classs;
+    const chType = ctx.request.body.data.chType;
+    const res = await ctx.service.article.getNewByCartoonType(size, currentPage, classs, chType);
     ctx.body = {
       res,
     };

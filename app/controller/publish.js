@@ -16,7 +16,10 @@ class PublishController extends Controller {
     const date = form.data.date;
     const time = form.data.time;
     const type = form.data.type;
-    const res = await ctx.service.article.index(title, describe, content, imgUrl, date, time, author, type);
+    const classs = form.data.class;
+    const cartoonType = form.data.cartoonType;
+    const videoAudio = form.data.videoAudio;
+    const res = await ctx.service.article.index(title, describe, content, imgUrl, date, time, author, type, classs, videoAudio, cartoonType);
     ctx.body = {
       res,
     };

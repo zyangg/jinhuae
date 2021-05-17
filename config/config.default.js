@@ -41,6 +41,7 @@ module.exports = appInfo => {
       url: 'mongodb://127.0.0.1/news',
       options: {
         useNewUrlParser: true,
+        useUnifiedTopology: true,
       },
     },
   };

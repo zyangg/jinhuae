@@ -36,6 +36,15 @@ module.exports = app => {
       type: Boolean,
       default: false,
     },
+    class: {
+      type: String,
+    },
+    videoAudio: {
+      type: String,
+    },
+    cartoonType: {
+      type: String,
+    },
   });
   return mongoose.model('Article', OrderSchema, 'article'); // 返回model，其中projects为数据库中表的名称
 };
