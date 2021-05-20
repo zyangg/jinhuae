@@ -4,6 +4,7 @@ const Service = require('egg').Service;
 
 class ArticleService extends Service {
   async index(title, describe, content, img, date, time, author, type, classs, videoAudio, cartoonType) {
+    console.log('ddddddd', videoAudio);
     const { ctx } = this;
     ctx.model.Article.create({ title, describe, content, img, date, time, author, type, class: classs, videoAudio, cartoonType });
   }
